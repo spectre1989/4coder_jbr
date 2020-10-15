@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="4coder_custom">
+      <UniqueIdentifier>{9c8d64a5-b496-4ea2-88fd-24d18f8dc560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4coder_jbr">
+      <UniqueIdentifier>{da0fe57e-1223-4bb0-a7c2-68e0e915ab25}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\4coder_async_tasks.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_auto_indent.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_base_types.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_build_commands.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_clipboard.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_code_index.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_combined_write_commands.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_command_map.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_config.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_default_colors.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_default_framework.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_delta_rule.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_doc_content_types.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_draw.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\generated\4coder_event_codes.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_events.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_file.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_file_moving.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_function_list.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_helper.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_insertion.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_jump_lister.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_jump_sticky.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_jumping.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_layout_rule.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lexer_generator\4coder_lex_gen_hand_written.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_lister_base.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_log_parser.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_profile.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_profile_inspect.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_project_commands.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_scope_commands.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_search.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_string_match.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_system_types.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_table.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_token.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_tutorial.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_types.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\4coder_version.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\generated\command_metadata.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\generated\custom_api.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\generated\custom_api_master_list.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\generated\lexer_cpp.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lexer_generator\pcg_basic.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\generated\system_api.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\generated\system_api_master_list.h">
+      <Filter>4coder_custom</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\4coder_app_links_allocator.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_async_tasks.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_auto_indent.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_base_commands.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_base_types.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_buffer_seek_constructors.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_build_commands.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_cli_command.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_clipboard.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_code_index.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_code_index_listers.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_codepoint_map.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_combined_write_commands.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_command_map.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_config.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\languages\4coder_cpp_lexer_gen.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\languages\4coder_cpp_lexer_test.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_custom.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_default_bindings.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_default_colors.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_default_framework.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_default_framework_variables.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_default_hooks.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_default_include.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_default_map.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_delta_rule.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_doc_commands.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_doc_content_types.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_docs.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_draw.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_eol.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_events.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_examples.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_fancy.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_file.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_font_helper.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_function_list.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_hash_functions.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_helper.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_insertion.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_jump_lister.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_jump_sticky.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_jumping.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_keyboard_macro.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_layout.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_layout_rule.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lexer_generator\4coder_lex_gen_hand_written.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lexer_generator\4coder_lex_gen_main.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_lister_base.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_lists.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_log.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_log_parser.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_mac_map.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_malloc_allocator.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_metadata_generator.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_miblo_numbers.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_profile.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_profile_inspect.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_profile_static_disable.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_profile_static_enable.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_project_commands.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_scope_commands.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_search.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_string_match.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_stringf.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_system_allocator.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_system_helpers.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_table.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_token.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\4coder_tutorial.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\generated\custom_api.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\generated\custom_api_constructor.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\generated\lexer_cpp.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\generated\managed_id_metadata.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lexer_generator\pcg_basic.c">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\generated\system_api.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\generated\system_api_constructor.cpp">
+      <Filter>4coder_custom</Filter>
+    </ClCompile>
+    <ClCompile Include="4coder_jbr.cpp">
+      <Filter>4coder_jbr</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

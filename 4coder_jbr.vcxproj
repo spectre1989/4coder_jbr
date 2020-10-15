@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{9b3219f9-9e9d-4dec-a6e8-daa9a6044c19}</ProjectGuid>
+    <RootNamespace>My4coderjbr</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\4coder_async_tasks.h" />
+    <ClInclude Include="..\4coder_auto_indent.h" />
+    <ClInclude Include="..\4coder_base_types.h" />
+    <ClInclude Include="..\4coder_build_commands.h" />
+    <ClInclude Include="..\4coder_clipboard.h" />
+    <ClInclude Include="..\4coder_code_index.h" />
+    <ClInclude Include="..\4coder_combined_write_commands.h" />
+    <ClInclude Include="..\4coder_command_map.h" />
+    <ClInclude Include="..\4coder_config.h" />
+    <ClInclude Include="..\4coder_default_colors.h" />
+    <ClInclude Include="..\4coder_default_framework.h" />
+    <ClInclude Include="..\4coder_delta_rule.h" />
+    <ClInclude Include="..\4coder_doc_content_types.h" />
+    <ClInclude Include="..\4coder_draw.h" />
+    <ClInclude Include="..\4coder_events.h" />
+    <ClInclude Include="..\4coder_file.h" />
+    <ClInclude Include="..\4coder_file_moving.h" />
+    <ClInclude Include="..\4coder_function_list.h" />
+    <ClInclude Include="..\4coder_helper.h" />
+    <ClInclude Include="..\4coder_insertion.h" />
+    <ClInclude Include="..\4coder_jumping.h" />
+    <ClInclude Include="..\4coder_jump_lister.h" />
+    <ClInclude Include="..\4coder_jump_sticky.h" />
+    <ClInclude Include="..\4coder_layout_rule.h" />
+    <ClInclude Include="..\4coder_lister_base.h" />
+    <ClInclude Include="..\4coder_log_parser.h" />
+    <ClInclude Include="..\4coder_profile.h" />
+    <ClInclude Include="..\4coder_profile_inspect.h" />
+    <ClInclude Include="..\4coder_project_commands.h" />
+    <ClInclude Include="..\4coder_scope_commands.h" />
+    <ClInclude Include="..\4coder_search.h" />
+    <ClInclude Include="..\4coder_string_match.h" />
+    <ClInclude Include="..\4coder_system_types.h" />
+    <ClInclude Include="..\4coder_table.h" />
+    <ClInclude Include="..\4coder_token.h" />
+    <ClInclude Include="..\4coder_tutorial.h" />
+    <ClInclude Include="..\4coder_types.h" />
+    <ClInclude Include="..\4coder_version.h" />
+    <ClInclude Include="..\generated\4coder_event_codes.h" />
+    <ClInclude Include="..\generated\command_metadata.h" />
+    <ClInclude Include="..\generated\custom_api.h" />
+    <ClInclude Include="..\generated\custom_api_master_list.h" />
+    <ClInclude Include="..\generated\lexer_cpp.h" />
+    <ClInclude Include="..\generated\system_api.h" />
+    <ClInclude Include="..\generated\system_api_master_list.h" />
+    <ClInclude Include="..\lexer_generator\4coder_lex_gen_hand_written.h" />
+    <ClInclude Include="..\lexer_generator\pcg_basic.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\4coder_app_links_allocator.cpp" />
+    <ClCompile Include="..\4coder_async_tasks.cpp" />
+    <ClCompile Include="..\4coder_auto_indent.cpp" />
+    <ClCompile Include="..\4coder_base_commands.cpp" />
+    <ClCompile Include="..\4coder_base_types.cpp" />
+    <ClCompile Include="..\4coder_buffer_seek_constructors.cpp" />
+    <ClCompile Include="..\4coder_build_commands.cpp" />
+    <ClCompile Include="..\4coder_clipboard.cpp" />
+    <ClCompile Include="..\4coder_cli_command.cpp" />
+    <ClCompile Include="..\4coder_codepoint_map.cpp" />
+    <ClCompile Include="..\4coder_code_index.cpp" />
+    <ClCompile Include="..\4coder_code_index_listers.cpp" />
+    <ClCompile Include="..\4coder_combined_write_commands.cpp" />
+    <ClCompile Include="..\4coder_command_map.cpp" />
+    <ClCompile Include="..\4coder_config.cpp" />
+    <ClCompile Include="..\4coder_custom.cpp" />
+    <ClCompile Include="..\4coder_default_bindings.cpp" />
+    <ClCompile Include="..\4coder_default_colors.cpp" />
+    <ClCompile Include="..\4coder_default_framework.cpp" />
+    <ClCompile Include="..\4coder_default_framework_variables.cpp" />
+    <ClCompile Include="..\4coder_default_hooks.cpp" />
+    <ClCompile Include="..\4coder_default_include.cpp" />
+    <ClCompile Include="..\4coder_default_map.cpp" />
+    <ClCompile Include="..\4coder_delta_rule.cpp" />
+    <ClCompile Include="..\4coder_docs.cpp" />
+    <ClCompile Include="..\4coder_doc_commands.cpp" />
+    <ClCompile Include="..\4coder_doc_content_types.cpp" />
+    <ClCompile Include="..\4coder_draw.cpp" />
+    <ClCompile Include="..\4coder_eol.cpp" />
+    <ClCompile Include="..\4coder_events.cpp" />
+    <ClCompile Include="..\4coder_examples.cpp" />
+    <ClCompile Include="..\4coder_fancy.cpp" />
+    <ClCompile Include="..\4coder_file.cpp" />
+    <ClCompile Include="..\4coder_font_helper.cpp" />
+    <ClCompile Include="..\4coder_function_list.cpp" />
+    <ClCompile Include="..\4coder_hash_functions.cpp" />
+    <ClCompile Include="..\4coder_helper.cpp" />
+    <ClCompile Include="..\4coder_insertion.cpp" />
+    <ClCompile Include="..\4coder_jumping.cpp" />
+    <ClCompile Include="..\4coder_jump_lister.cpp" />
+    <ClCompile Include="..\4coder_jump_sticky.cpp" />
+    <ClCompile Include="..\4coder_keyboard_macro.cpp" />
+    <ClCompile Include="..\4coder_layout.cpp" />
+    <ClCompile Include="..\4coder_layout_rule.cpp" />
+    <ClCompile Include="..\4coder_lister_base.cpp" />
+    <ClCompile Include="..\4coder_lists.cpp" />
+    <ClCompile Include="..\4coder_log.cpp" />
+    <ClCompile Include="..\4coder_log_parser.cpp" />
+    <ClCompile Include="..\4coder_mac_map.cpp" />
+    <ClCompile Include="..\4coder_malloc_allocator.cpp" />
+    <ClCompile Include="..\4coder_metadata_generator.cpp" />
+    <ClCompile Include="..\4coder_miblo_numbers.cpp" />
+    <ClCompile Include="..\4coder_profile.cpp" />
+    <ClCompile Include="..\4coder_profile_inspect.cpp" />
+    <ClCompile Include="..\4coder_profile_static_disable.cpp" />
+    <ClCompile Include="..\4coder_profile_static_enable.cpp" />
+    <ClCompile Include="..\4coder_project_commands.cpp" />
+    <ClCompile Include="..\4coder_scope_commands.cpp" />
+    <ClCompile Include="..\4coder_search.cpp" />
+    <ClCompile Include="..\4coder_stringf.cpp" />
+    <ClCompile Include="..\4coder_string_match.cpp" />
+    <ClCompile Include="..\4coder_system_allocator.cpp" />
+    <ClCompile Include="..\4coder_system_helpers.cpp" />
+    <ClCompile Include="..\4coder_table.cpp" />
+    <ClCompile Include="..\4coder_token.cpp" />
+    <ClCompile Include="..\4coder_tutorial.cpp" />
+    <ClCompile Include="..\generated\custom_api.cpp" />
+    <ClCompile Include="..\generated\custom_api_constructor.cpp" />
+    <ClCompile Include="..\generated\lexer_cpp.cpp" />
+    <ClCompile Include="..\generated\managed_id_metadata.cpp" />
+    <ClCompile Include="..\generated\system_api.cpp" />
+    <ClCompile Include="..\generated\system_api_constructor.cpp" />
+    <ClCompile Include="..\languages\4coder_cpp_lexer_gen.cpp" />
+    <ClCompile Include="..\languages\4coder_cpp_lexer_test.cpp" />
+    <ClCompile Include="..\lexer_generator\4coder_lex_gen_hand_written.cpp" />
+    <ClCompile Include="..\lexer_generator\4coder_lex_gen_main.cpp" />
+    <ClCompile Include="..\lexer_generator\pcg_basic.c" />
+    <ClCompile Include="4coder_jbr.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

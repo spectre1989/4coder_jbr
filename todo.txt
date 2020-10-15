@@ -1,0 +1,15 @@
+proper syntax highlighting
+open header/cpp in other panel
+flip panels
+jump to definition
+project selector
+autocomplete
+command to open config file
+multi insert
+ctrl+d style multi insert
+remember what project and buffers were open
+todo panel
+double click word to select word 
+list definitions and fuzzy search
+list files and fuzzy search
+blinking cursor
