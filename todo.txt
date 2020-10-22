@@ -13,3 +13,7 @@ double click word to select word
 list definitions and fuzzy search
 list files and fuzzy search
 blinking cursor
+reload config command
+build panel, jump to errors etc
+duplicate line
+move dirty * to earlier 
