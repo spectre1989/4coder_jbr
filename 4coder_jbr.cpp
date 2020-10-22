@@ -163,7 +163,17 @@ static void jbr_hard_exit(Application_Links* app)
             String_u8 indent = push_string_u8(scratch, 1);
             indent.str[0] = 0;
             write_panel_state(app, &scratch, file, panel_get_root(app), &indent);
-            fprintf(file, ";");
+            fprintf(file, ";\n\n");
+
+            Buffer_ID scratch_buffer_id = get_buffer_by_name(app, string_u8_litexpr("*scratch*"), Access_Read);
+            if (scratch_buffer_id)
+            {
+                i64 size = buffer_get_size(app, scratch_buffer_id);
+                String_u8 scratch_contents = push_string_u8(scratch, size + 1);
+                buffer_read_range(app, scratch_buffer_id, {0, size}, scratch_contents.str);
+                scratch_contents.str[size] = 0;
+                fprintf(file, "scratch = \"%s\";", scratch_contents.str);
+            }
 
             fclose(file);
         }
@@ -356,19 +366,16 @@ static void read_panel_state(Application_Links* app, Config_Compound* config_com
     }
     else
     {
-        //Buffer_ID buffer_id = 0;
+        Buffer_ID buffer_id = 0;
         if (is_file)
         {
-            //buffer_id = get_buffer_by_file_name(app, name, Access_Always);
+            buffer_id = get_buffer_by_file_name(app, name, Access_Always);
         }
         else
         {
-            //buffer_id = get_buffer_by_name(app, name, Access_Always);
+            buffer_id = get_buffer_by_name(app, name, Access_Always);
         }
 
-        Buffer_ID buffer_id = get_buffer_by_name(app, string_u8_litexpr("*scratch*"), Access_Always);
         view_set_buffer(app, panel_get_view(app, panel, Access_Always), buffer_id, 0);
-
-        //view_set_buffer(app, panel_get_view(app, panel, Access_Always), buffer_id, 0);
     }
 }
