@@ -96,23 +96,20 @@ CUSTOM_DOC("")
                         if (assignment->r->type == ConfigRValueType_Compound)
                         {
                             // first close everything down to a single view
-                            while (true)
+                            View_ID view_iter = get_view_next(app, 0, Access_Always);
+                            while (view_iter)
                             {
-                                View_ID view = get_active_view(app, Access_Always);
-                                if (!view)
+                                // 4ed seems to get angry and crash if you close the active view,
+                                // so close all the others
+                                if (view_iter != get_active_view(app, Access_Always))
                                 {
-                                    break;
+                                    view_close(app, view_iter);
                                 }
-
-                                b32 closed = view_close(app, view);
-                                if (!closed)
-                                {
-                                    // when you're down to one view, it won't close
-                                    break;
-                                }
+                                
+                                view_iter = get_view_next(app, view_iter, Access_Always);
                             }
 
-                            // restore views from state file
+                            // restore panels
                             read_panel_state(app, assignment->r->compound, panel_get_root(app));
                         }
                     }
@@ -361,8 +358,6 @@ static void read_panel_state(Application_Links* app, Config_Compound* config_com
 
         read_panel_state(app, min, panel_min);
         read_panel_state(app, max, panel_max);
-        
-        view_set_active(app, view);
     }
     else
     {
