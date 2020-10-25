@@ -69,6 +69,8 @@ CUSTOM_DOC("")
         {
             Token_Array token_array = token_array_from_text(app, scratch, SCu8(file.data));
 
+            Config_Compound* root_panel = nullptr;
+
             Config_Parser parser = make_config_parser(scratch, file.file_name, SCu8(file.data), token_array);
             for (; !config_parser__recognize_token(&parser, TokenCppKind_EOF);) 
             {
@@ -95,25 +97,40 @@ CUSTOM_DOC("")
                     {
                         if (assignment->r->type == ConfigRValueType_Compound)
                         {
-                            // first close everything down to a single view
-                            View_ID view_iter = get_view_next(app, 0, Access_Always);
-                            while (view_iter)
-                            {
-                                // 4ed seems to get angry and crash if you close the active view,
-                                // so close all the others
-                                if (view_iter != get_active_view(app, Access_Always))
-                                {
-                                    view_close(app, view_iter);
-                                }
-                                
-                                view_iter = get_view_next(app, view_iter, Access_Always);
-                            }
-
-                            // restore panels
-                            read_panel_state(app, assignment->r->compound, panel_get_root(app));
+                            // cache this and restore panels later, want to load the buffers and restore
+                            // state of scratch first, otherwise setting cursor pos won't work
+                            root_panel = assignment->r->compound;
+                        }
+                    }
+                    else if (string_match(assignment->l->identifier, string_u8_litexpr("scratch")))
+                    {
+                        if (assignment->r->type == ConfigRValueType_String)
+                        {
+                            Buffer_ID scratch_buffer = get_buffer_by_name(app, string_u8_litexpr("*scratch*"), Access_Always);
+                            buffer_replace_range(app, scratch_buffer, Ii64((i64)0), assignment->r->string);
                         }
                     }
                 }
+            }
+
+            if (root_panel)
+            {
+                // first close everything down to a single view
+                View_ID view_iter = get_view_next(app, 0, Access_Always);
+                while (view_iter)
+                {
+                    // 4ed seems to get angry and crash if you close the active view,
+                    // so close all the others
+                    if (view_iter != get_active_view(app, Access_Always))
+                    {
+                        view_close(app, view_iter);
+                    }
+
+                    view_iter = get_view_next(app, view_iter, Access_Always);
+                }
+
+                // restore panels
+                read_panel_state(app, root_panel, panel_get_root(app));
             }
         }
     }
@@ -166,9 +183,11 @@ static void jbr_hard_exit(Application_Links* app)
             if (scratch_buffer_id)
             {
                 i64 size = buffer_get_size(app, scratch_buffer_id);
-                String_u8 scratch_contents = push_string_u8(scratch, size + 1);
+                String_Const_u8 scratch_contents = push_string_u8(scratch, size + 1).string;
                 buffer_read_range(app, scratch_buffer_id, {0, size}, scratch_contents.str);
                 scratch_contents.str[size] = 0;
+                scratch_contents.size = size;
+                scratch_contents = string_replace(scratch, scratch_contents, string_u8_litexpr("\n"), string_u8_litexpr("\\n"));
                 fprintf(file, "scratch = \"%s\";", scratch_contents.str);
             }
 
@@ -272,6 +291,18 @@ static void write_panel_state(Application_Links* app, Scratch_Block* scratch, FI
             fprintf(file, "%s\t.is_file = 0,\n", indent->str);
             fprintf(file, "%s\t.name = \"%s\",\n", indent->str, unique_name.str);
         }
+        
+        fprintf(file, "%s\t.cursor_pos = %lld,\n", indent->str, view_get_cursor_pos(app, view));
+
+        if (get_active_view(app, Access_Always) == view)
+        {
+            fprintf(file, "%s\t.is_active = 1,\n", indent->str);
+            fprintf(file, "%s\t.mark_pos = %lld,\n", indent->str, view_get_mark_pos(app, view));
+        }
+        else
+        {
+            fprintf(file, "%s\t.is_active = 0,\n", indent->str);
+        }
     }
 
     fprintf(file, "%s}", indent->str);
@@ -281,10 +312,13 @@ static void read_panel_state(Application_Links* app, Config_Compound* config_com
 {
     String_Const_u8 split = {};
     float t = 0.0f;
-    int is_file = 0;
+    i32 is_file = 0;
     String_Const_u8 name = {};
     Config_Compound* min = nullptr;
     Config_Compound* max = nullptr;
+    i64 mark_pos = 0;
+    i64 cursor_pos = 0;
+    i32 is_active = 0;
 
     Config_Compound_Element* elem = config_compound->first;
     while (elem)
@@ -331,6 +365,27 @@ static void read_panel_state(Application_Links* app, Config_Compound* config_com
                 name = elem->r->string;
             }
         }
+        else if (string_match(elem->l.identifier, string_u8_litexpr("mark_pos")))
+        {
+            if (elem->r->type == ConfigRValueType_Integer)
+            {
+                mark_pos = elem->r->integer;
+            }
+        }
+        else if (string_match(elem->l.identifier, string_u8_litexpr("cursor_pos")))
+        {
+            if (elem->r->type == ConfigRValueType_Integer)
+            {
+                cursor_pos = elem->r->integer;
+            }
+        }
+        else if (string_match(elem->l.identifier, string_u8_litexpr("is_active")))
+        {
+            if (elem->r->type == ConfigRValueType_Integer)
+            {
+                is_active = elem->r->integer;
+            }
+        }
 
         elem = elem->next;
     }
@@ -371,6 +426,18 @@ static void read_panel_state(Application_Links* app, Config_Compound* config_com
             buffer_id = get_buffer_by_name(app, name, Access_Always);
         }
 
-        view_set_buffer(app, panel_get_view(app, panel, Access_Always), buffer_id, 0);
+        View_ID view = panel_get_view(app, panel, Access_Always);
+        view_set_buffer(app, view, buffer_id, 0);
+        if (is_active)
+        {
+            view_set_active(app, view);
+            view_set_mark(app, view, seek_pos(mark_pos));
+            view_set_cursor(app, view, seek_pos(cursor_pos));
+        }
+        else
+        {
+            view_set_mark(app, view, seek_pos(cursor_pos));
+            view_set_cursor(app, view, seek_pos(cursor_pos));
+        }
     }
 }
