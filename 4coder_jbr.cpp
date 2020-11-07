@@ -1,6 +1,7 @@
 #include <direct.h>
 #include <Shlobj_core.h>
 #pragma comment(lib, "Shell32")
+#pragma comment(lib, "User32")
 
 #include "4coder_default_include.cpp"
 
@@ -10,8 +11,12 @@
 
 
 
-static custom_hard_exit_type* default_hard_exit = 0;
+static custom_hard_exit_type* g_default_hard_exit = 0;
+static WINDOWPLACEMENT g_window_placement;
+static bool g_window_placement_needs_restored;
+
 static void jbr_hard_exit(Application_Links* app);
+static void jbr_tick(Application_Links* app, Frame_Info frame_info);
 static void write_panel_state(Application_Links* app, Scratch_Block* scratch, FILE* file, Panel_ID panel, String_u8* indent);
 static void read_panel_state(Application_Links* app, Config_Compound* config_compound, Panel_ID panel);
 
@@ -37,7 +42,8 @@ custom_layer_init(Application_Links* app) {
 
     SelectMap(mapid_global);
     BindCore(jbr_startup, CoreCode_Startup);
-    default_hard_exit = hard_exit;
+    set_custom_hook(app, HookID_Tick, jbr_tick);
+    g_default_hard_exit = hard_exit;
     hard_exit = jbr_hard_exit;
 }
 
@@ -77,7 +83,60 @@ CUSTOM_DOC("")
                 Config_Assignment* assignment = config_parser__assignment(&parser);
                 if (assignment) 
                 {
-                    if (string_match(assignment->l->identifier, string_u8_litexpr("loaded_files")))
+                    if (string_match(assignment->l->identifier, string_u8_litexpr("window_placement")))
+                    {
+                        if (assignment->r->type == ConfigRValueType_Compound)
+                        {
+                            g_window_placement = {};
+                            g_window_placement.length = sizeof(g_window_placement);
+                            g_window_placement.ptMaxPosition = { -1, -1 };
+                            g_window_placement.ptMinPosition = { -1, -1 };
+
+                            Config_Compound_Element* elem = assignment->r->compound->first;
+                            while (elem)
+                            {
+                                if (string_match(elem->l.identifier, string_u8_litexpr("show_cmd")))
+                                {
+                                    if (elem->r->type == ConfigRValueType_Integer)
+                                    {
+                                        g_window_placement.showCmd = elem->r->uinteger;
+                                        g_window_placement_needs_restored = true;
+                                    }
+                                }
+                                else if (string_match(elem->l.identifier, string_u8_litexpr("left")))
+                                {
+                                    if (elem->r->type == ConfigRValueType_Integer)
+                                    {
+                                        g_window_placement.rcNormalPosition.left = elem->r->integer;
+                                    }
+                                }
+                                else if (string_match(elem->l.identifier, string_u8_litexpr("right")))
+                                {
+                                    if (elem->r->type == ConfigRValueType_Integer)
+                                    {
+                                        g_window_placement.rcNormalPosition.right = elem->r->integer;
+                                    }
+                                }
+                                else if (string_match(elem->l.identifier, string_u8_litexpr("top")))
+                                {
+                                    if (elem->r->type == ConfigRValueType_Integer)
+                                    {
+                                        g_window_placement.rcNormalPosition.top = elem->r->integer;
+                                    }
+                                }
+                                else if (string_match(elem->l.identifier, string_u8_litexpr("bottom")))
+                                {
+                                    if (elem->r->type == ConfigRValueType_Integer)
+                                    {
+                                        g_window_placement.rcNormalPosition.bottom = elem->r->integer;
+                                    }
+                                }
+
+                                elem = elem->next;
+                            }
+                        }
+                    }
+                    else if (string_match(assignment->l->identifier, string_u8_litexpr("loaded_files")))
                     {
                         if (assignment->r->type == ConfigRValueType_Compound)
                         {
@@ -157,6 +216,17 @@ static void jbr_hard_exit(Application_Links* app)
         FILE* file = fopen(path, "w");
         if (file)
         {
+            fprintf(file, "window_placement = \n{");
+            fprintf(file, "\n\t.show_cmd = %u,", g_window_placement.showCmd);
+            if (g_window_placement.showCmd != SW_MAXIMIZE)
+            {
+                fprintf(file, "\n\t.left = %u,", (u32)g_window_placement.rcNormalPosition.left);
+                fprintf(file, "\n\t.right = %u,", (u32)g_window_placement.rcNormalPosition.right);
+                fprintf(file, "\n\t.top = %u,", (u32)g_window_placement.rcNormalPosition.top);
+                fprintf(file, "\n\t.bottom = %u,", (u32)g_window_placement.rcNormalPosition.bottom);
+            }
+            fprintf(file, "\n};\n\n");
+
             Scratch_Block scratch(app);
 
             fprintf(file, "loaded_files = \n{");
@@ -195,7 +265,32 @@ static void jbr_hard_exit(Application_Links* app)
         }
     }
 
-    default_hard_exit(app);
+    g_default_hard_exit(app);
+}
+
+static void jbr_tick(Application_Links* app, Frame_Info frame_info) 
+{
+    default_tick(app, frame_info);
+
+    HWND hwnd = GetActiveWindow();
+    if (hwnd)
+    {
+        if (g_window_placement_needs_restored)
+        {
+            g_window_placement_needs_restored = false;
+
+            if (g_window_placement.showCmd == SW_MAXIMIZE)
+            {
+                ShowWindow(hwnd, SW_MAXIMIZE);
+            }
+            else
+            {
+                SetWindowPlacement(hwnd, &g_window_placement);
+            }
+        }
+
+        GetWindowPlacement(hwnd, &g_window_placement);
+    }
 }
 
 
