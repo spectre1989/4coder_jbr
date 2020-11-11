@@ -76,6 +76,8 @@ CUSTOM_DOC("")
             Token_Array token_array = token_array_from_text(app, scratch, SCu8(file.data));
 
             Config_Compound* root_panel = nullptr;
+            String_Const_u8 current_project_dir = {};
+            String_Const_u8 hot_directory = {};
 
             Config_Parser parser = make_config_parser(scratch, file.file_name, SCu8(file.data), token_array);
             for (; !config_parser__recognize_token(&parser, TokenCppKind_EOF);) 
@@ -83,16 +85,19 @@ CUSTOM_DOC("")
                 Config_Assignment* assignment = config_parser__assignment(&parser);
                 if (assignment) 
                 {
-                    if (string_match(assignment->l->identifier, string_u8_litexpr("window_placement")))
+                    String_Const_u8 identifier = assignment->l->identifier;
+                    Config_RValue* value = assignment->r;
+
+                    if (string_match(identifier, string_u8_litexpr("window_placement")))
                     {
-                        if (assignment->r->type == ConfigRValueType_Compound)
+                        if (value->type == ConfigRValueType_Compound)
                         {
                             g_window_placement = {};
                             g_window_placement.length = sizeof(g_window_placement);
                             g_window_placement.ptMaxPosition = { -1, -1 };
                             g_window_placement.ptMinPosition = { -1, -1 };
 
-                            Config_Compound_Element* elem = assignment->r->compound->first;
+                            Config_Compound_Element* elem = value->compound->first;
                             while (elem)
                             {
                                 if (string_match(elem->l.identifier, string_u8_litexpr("show_cmd")))
@@ -136,11 +141,25 @@ CUSTOM_DOC("")
                             }
                         }
                     }
-                    else if (string_match(assignment->l->identifier, string_u8_litexpr("loaded_files")))
+                    else if (string_match(identifier, string_u8_litexpr("current_project_dir")))
                     {
-                        if (assignment->r->type == ConfigRValueType_Compound)
+                        if (value->type == ConfigRValueType_String)
                         {
-                            Config_Compound_Element* elem = assignment->r->compound->first;
+                            current_project_dir = value->string;
+                        }
+                    }
+                    else if (string_match(identifier, string_u8_litexpr("hot_directory")))
+                    {
+                        if (value->type == ConfigRValueType_String)
+                        {
+                            hot_directory = value->string;
+                        }
+                    }
+                    else if (string_match(identifier, string_u8_litexpr("loaded_files")))
+                    {
+                        if (value->type == ConfigRValueType_Compound)
+                        {
+                            Config_Compound_Element* elem = value->compound->first;
                             while (elem)
                             {
                                 if (elem->r->type == ConfigRValueType_String)
@@ -152,21 +171,21 @@ CUSTOM_DOC("")
                             }
                         }
                     }
-                    else if (string_match(assignment->l->identifier, string_u8_litexpr("root_panel")))
+                    else if (string_match(identifier, string_u8_litexpr("root_panel")))
                     {
-                        if (assignment->r->type == ConfigRValueType_Compound)
+                        if (value->type == ConfigRValueType_Compound)
                         {
                             // cache this and restore panels later, want to load the buffers and restore
                             // state of scratch first, otherwise setting cursor pos won't work
-                            root_panel = assignment->r->compound;
+                            root_panel = value->compound;
                         }
                     }
-                    else if (string_match(assignment->l->identifier, string_u8_litexpr("scratch")))
+                    else if (string_match(identifier, string_u8_litexpr("scratch")))
                     {
-                        if (assignment->r->type == ConfigRValueType_String)
+                        if (value->type == ConfigRValueType_String)
                         {
                             Buffer_ID scratch_buffer = get_buffer_by_name(app, string_u8_litexpr("*scratch*"), Access_Always);
-                            buffer_replace_range(app, scratch_buffer, Ii64((i64)0), assignment->r->string);
+                            buffer_replace_range(app, scratch_buffer, Ii64((i64)0), value->string);
                         }
                     }
                 }
@@ -191,6 +210,15 @@ CUSTOM_DOC("")
                 // restore panels
                 read_panel_state(app, root_panel, panel_get_root(app));
             }
+
+            if (current_project_dir.size)
+            {
+                String_Const_u8 project_file_path = push_stringf(scratch, "%sproject.4coder", current_project_dir.str);
+                File_Name_Data project_file = dump_file(scratch, project_file_path);
+                set_current_project_from_data(app, project_file_path, project_file.data, current_project_dir);
+            }
+
+            set_hot_directory(app, hot_directory);
         }
     }
 }
@@ -216,6 +244,8 @@ static void jbr_hard_exit(Application_Links* app)
         FILE* file = fopen(path, "w");
         if (file)
         {
+            Scratch_Block scratch(app);
+
             fprintf(file, "window_placement = \n{");
             fprintf(file, "\n\t.show_cmd = %u,", g_window_placement.showCmd);
             if (g_window_placement.showCmd != SW_MAXIMIZE)
@@ -227,7 +257,10 @@ static void jbr_hard_exit(Application_Links* app)
             }
             fprintf(file, "\n};\n\n");
 
-            Scratch_Block scratch(app);
+            fprintf(file, "current_project_dir = \"%s\";\n\n", current_project.dir.str);
+
+            String_Const_u8 hot_directory = push_hot_directory(app, scratch);
+            fprintf(file, "hot_directory = \"%s\";\n\n", hot_directory.str);
 
             fprintf(file, "loaded_files = \n{");
 
